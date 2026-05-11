@@ -1,9 +1,36 @@
+
 <?php
 session_start();
+include 'connect.php';
+//test code
+echo "<pre>";
+echo "=== SESSION DEBUG ===\n";
+echo "user_id: " . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'NOT SET') . "\n";
+echo "user_role: " . (isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'NOT SET') . "\n";
+echo "user_name: " . (isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'NOT SET') . "\n";
+echo "=== END DEBUG ===\n";
+echo "</pre>";
 
-if(!isset($_SESSION['user']))
+if(!isset($_SESSION['user_id']))
     {
         header("Location:login.php");
+        exit();
+    }
+
+if($_SESSION['user_role']!='admin' && $_SESSION['user_role']!='supper_admin')
+    {
+        if($_SESSION['user_role']=='donor')
+            {
+                header("Location:donor_dashboard.php");
+            }
+        else if($_SESSION['user_role']=='recipient')
+            {
+                header("Location:recipient_dashboard.php");
+            }
+        else
+            {
+                header("Location:login.php");
+            }
         exit();
     }
 ?>
