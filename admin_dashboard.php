@@ -2,14 +2,6 @@
 <?php
 session_start();
 include 'connect.php';
-//test code
-echo "<pre>";
-echo "=== SESSION DEBUG ===\n";
-echo "user_id: " . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'NOT SET') . "\n";
-echo "user_role: " . (isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'NOT SET') . "\n";
-echo "user_name: " . (isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'NOT SET') . "\n";
-echo "=== END DEBUG ===\n";
-echo "</pre>";
 
 if(!isset($_SESSION['user_id']))
     {
