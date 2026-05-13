@@ -18,13 +18,6 @@ if($result && mysqli_num_rows($result) == 1) {
 }
 
 if(!$user) {
-    $result = mysqli_query($conn, "SELECT Recipient_ID AS user_id, Name, Email, 'recipient' AS role, Password FROM recipient WHERE Email='$email'");
-    if($result && mysqli_num_rows($result) == 1) {
-        $user = mysqli_fetch_assoc($result);
-    }
-}
-
-if(!$user) {
     $result = mysqli_query($conn, "SELECT Admin_ID AS user_id, Name, Email, Role AS role, Password FROM admin WHERE Email='$email'");
     if($result && mysqli_num_rows($result) == 1) {
         $user = mysqli_fetch_assoc($result);

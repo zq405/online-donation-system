@@ -8,31 +8,19 @@ include 'connect.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #donorsFields{transition:all 0.3s ease;}
+    </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Create an Account</h2>
         <div id="errorMsg" class="error"></div>
         <form action="register_process.php" method="POST" id="registerForm">
-            <div>
-                <label>Register as:</label>
-                <select name="role" id="role" required>
-                    <option value="">Select Role</option>
-                    <option value="donor">Donor</option>
-                    <option value="recipient">Recipient</option>
-                </select>
-            </div>
             <div id="donorsFields">
                 <label>Full Name</label>
                 <input type="text" name="donor_name" autocomplete="name" placeholder="Enter you full name">
-            </div>
-            <div id="recipientFields" style="display:none;">
-                <label>Organization Name</label>
-                <input type="text" name="org_name" autocomplete="organization" placeholder="Enter Organizaiton name">
-                <label>Contact Person Name</label>
-                <input type="text" name="contact_person" placeholder="Enter contact person name">
-                <label>Address</label>
-                <input type="text" name="address" autocomplete="address-line1" placeholder="Enter address">
             </div>
             <div>
                 <label>Email</label>
@@ -58,43 +46,27 @@ include 'connect.php';
     </div>
 
     <script>
-        const roleSelect=document.getElementById('role');
-        const donorsFields=document.getElementById('donorsFields');
-        const recipientFields=document.getElementById('recipientFields');
-
-        roleSelect.addEventListener('change',function()
-        {
-            if(this.value==='donor')
-            {
-                donorsFields.style.display='block';
-                recipientFields.style.display='none';
-            }
-            else if(this.value==='recipient')
-            {
-                donorsFields.style.display='none';
-                recipientFields.style.display='block';
-            }
-            else
-            {
-                donorsFields.style.display='none';
-                recipientFields.style.display='none';
-            }
-        });
-
         document.getElementById('registerForm').addEventListener('submit',function(e)
         {
             const pwd=document.getElementById('password').value;
             const confirm=document.getElementById('confirm_password').value;
+            const errorMsgDiv=document.getElementById('errorMsg');
             
             if(pwd!==confirm)
             {
                 e.preventDefault();
-                document.getElementById('errorMsg').innerHTML='Password do not match';
+                errorMsgDiv.style.display='block';
+                errorMsgDiv.innerHTML='Password do not match';
             }
             else if(pwd.length<6)
             {
                 e.preventDefault();
-                document.getElementById('errorMsg').innerHTML='Password must be at least 6 characters';
+                errorMsgDiv.style.display='block';
+                errorMsgDiv.innerHTML='Password must be at least 6 characters';
+            }
+            else
+            {
+                errorMsgDiv.style.display='none';
             }
         });
     </script>

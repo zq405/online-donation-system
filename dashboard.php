@@ -15,9 +15,6 @@ switch($role)
     case 'donor':
         header('Location:donor_dashboard.php');
         break;
-    case 'recipient':
-        header('Location: recipient_dashboard.php');
-        break;
     case 'admin':
         header('Location:admin_dashboard.php');
         break;
