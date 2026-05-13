@@ -1,0 +1,476 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg,#f5f7fa 0%,#e4e8f0 100%);
+    min-height: 100vh;
+}
+
+.nav
+{
+    display: flex;
+    justify-content: cneter;
+    gap: 20px;
+    background: #00C3FF;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 15px rgba(0,195,255,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav a
+{
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav a:hover
+{
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.nav a:active
+{
+    transform: translateY(0);
+}
+
+.nav a:last-child
+{
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav a:last-child:hover
+{
+    background: #ff4757;
+}
+
+.container
+{
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.card
+{
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 40px rgbs(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover
+{
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,195,255,0.2);
+}
+
+.card h2
+{
+    color:#333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #00C3FF;
+    display: inline-block;
+}
+
+.card h3
+{
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.login-container
+{
+    max-width: 500px;
+    margin: 80px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,195,255,0.2);
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp
+{
+    from
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to
+    {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-container h2
+{
+    text-align: center;
+    color: #00C3FF;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.login-container h3
+{
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+    font-weight: normal;
+}
+
+form div
+{
+    margin-bottom: 20px;
+}
+
+label
+{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+input, select, textarea
+{
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+input:focus, select:focus, textarea:focus
+{
+    outline:none;
+    border-color: #00C3FF;
+    box-shadow: 0 0 0 3px rgba(0,195,255,0.2);
+}
+
+input:hover, select:hover
+{
+    border-color: #00C3FF;
+}
+
+button
+{
+    width: 100%;
+    padding: 14px;
+    background: #00C3FF;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover
+{
+    background: #0099cc;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,195,255,0.4);
+}
+
+button:active
+{
+    transform: translateY(0);
+}
+
+table
+{
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+th
+{
+    background: #00C3FF;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+td
+{
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover
+{
+    background: #f8f9fa;
+}
+
+.stats-grid
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card
+{
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-bottom: 4px solid #00C3FF;
+}
+
+.stat-card:hover
+{
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,195,255,0.15);
+}
+
+.stat-card h3
+{
+    color: #666;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.stat-card .number
+{
+    font-size: 48px;
+    font-weight: bold;
+    color: #00C3FF;
+}
+
+.error, .alert-error
+{
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 4px solid #dc2626;
+}
+
+.success, .alert-success
+{
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 4px solid #28a745;
+}
+
+.link, .login-link
+{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link a, .login-link a
+{
+    color: #00C3FF;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link a:hover, .login-link a:hover
+{
+    text-decoration: underline;
+}
+
+.button-group
+{
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.button-group .btn
+{
+    display: inline-block;
+    padding: 10px 25px;
+    background: #00C3FF;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: auto;
+}
+
+.button-group .btn:hover
+{
+    background: #0099cc;
+    transform: translateY(-2px);
+}
+
+.button-group .btn-danger
+{
+    background: #dc2626;
+}
+
+.button-group .btn-danger:hover
+{
+    background: #b91c1c;
+}
+
+.button-group .btn-success
+{
+    background: #28a745;
+}
+
+.button-group .btn-success:hover
+{
+    background: #1e7e34;
+}
+
+.modal
+{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content
+{
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 500px;
+    max-width: 90%;
+    animation: fadeInUp 0.3s ease;
+}
+
+.modal-content h3
+{
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.close
+{
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s;
+}
+
+.close:hover
+{
+    color: #333;
+}
+
+.welcome
+{
+    background: linear-gradient(135deg, #00C3FF 0%, #0099cc 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,195,255,0.3);
+}
+
+.welcome h1
+{
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.welcome p
+{
+    opacity: 0.9;
+}
+
+.quick-links
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.quick-links a
+{
+    display: block;
+    padding: 15px;
+    background: #f8f9fa;
+    text-decoration: none;
+    color: #333;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-left: 3px solid #00C3FF;
+}
+
+.quick-links a:hover
+{
+    background: #00C3FF;
+    color: white;
+    transform: translateX(5px);
+}
+
+@media (max-width:768px)
+{
+    .nav{gap: 10px;}
+    .nav a{padding: 8px 15px; font-size: 14px;}
+    .login-container{margin: 40px 20px; padding: 30px 20px;}
+    .stats-grid{grid-template-columns: 1fr;}
+    table{font-size: 14px;}
+    th,td{padding: 8px 10px;}
+    .card{padding: 15px;}
+    .welcome h1{font-size: 22px;}
+}
+
+::-webkit-scrollbar{width: 10px;}
+::-webkit-scrollbar-track{background: #f1f1f1;}
+::-webkit-scrollbar-thumb
+{
+    background: #00C3FF;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover
+{
+    background: #0099cc;
+}
