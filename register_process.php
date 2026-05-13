@@ -30,7 +30,7 @@ if($role==='donor')
                 exit();
             }
         
-        $sql="INSERT INTO donors(Name, Email, Password, Phone, Register)
+        $sql="INSERT INTO donors(Name, Email, Password, Phone, Register_Date)
             VALUES('$name','$email','$hashed_password','$phone',NOW())";
         if(mysqli_query($conn,$sql))
             {

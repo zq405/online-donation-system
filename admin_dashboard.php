@@ -87,4 +87,6 @@ $total_donations=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(amount)as tot
             <p>Email : <?php echo $_SESSION['user_email'];?></p>
         </div>
     </div>
+    <?php include 'footer.php';?>
+</body>
 </html>

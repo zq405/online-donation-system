@@ -18,6 +18,13 @@ include 'connect.php';
         <h2>Create an Account</h2>
         <div id="errorMsg" class="error"></div>
         <form action="register_process.php" method="POST" id="registerForm">
+            <div>
+                <label>Register as:</label>
+                <select name="role" id="role" required>
+                    <option value="">Select Role</option>
+                    <option value="donor">Donor</option>
+                </select>
+            </div>
             <div id="donorsFields">
                 <label>Full Name</label>
                 <input type="text" name="donor_name" autocomplete="name" placeholder="Enter you full name">
