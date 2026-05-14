@@ -17,23 +17,32 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <a href="#" class="logo">Animal Shelters House</a>
-            <ul class="nav-links">
+    <div class="top-nav">
+        <div class="nav-container">
+            <a href="mainpage-testing.php" class="logo"><span>Animal Shelters House</span></a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#impact">Our Impact</a></li>
-                <li><a href="#featured">Featured Campaigns</a></li>
-                <li><a href="#how=its-works">How It Works</a></li>
-                <li><a href="#how=its-works">How It Works</a></li>
+                <li><a href="#featured">Featured Campaign</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <?php if(isset($_SESSION['user_id'])&&($_SESSION['user_role']=='admin'||$_SESSION['user_role'])):?>
+                    <li><a href="admindashboard.php">Admin Dashboard</a></li>
+                <?php endif;?>
             </ul>
-            <?php if(isset($_SESSION['user_id'])):?>
-                <a href="dashboard.php" class="donate-btn-header" style="text-decoration:none">My Dashboard</a>
-            <?php else:?>
-                <button class="donate-btn-header" onclick="window.location.href='login.php'">Login/Register</button>
-            <?php endif;?>>
-        </nav>
-    </header>
+            <div class="user-menu">
+                <?php if(isset($_SESSION['user_id'])):?>
+                    <div class="user-welcome">
+                        <span><?php echo htmlspecialchars($_SESSION['user_name']??'User');?></span>
+                    </div>
+                    <a href="dashboard.php" class="btn-user">Dashboard</a>
+                    <a href="logout.php" class="btn-user btn-logout">Logout</a>
+                <?php else:?>
+                    <button class="btn-user" onclick="window.location.href='login.php'">Login</button>
+                    <button class="btn-user" onclick="window.location.href='register.php'">Register</button>
+                <?php endif;?>
+            </div>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-content">
@@ -45,7 +54,7 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
                 <?php else:?>
                     <button class="btn-primary" onclick="window.location.href='register.php'">Donate Now</button>
                 <?php endif;?>
-                <button class="btn-secondary" onclick="document.querySelector('#featured').scrollIntoView({behavior:'smooth'})">View Campaigns</button>>
+                <button class="btn-secondary" onclick="document.querySelector('#featured').scrollIntoView({behavior:'smooth'})">View Campaigns</button>
             </div>
         </div>
     </section>

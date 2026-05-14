@@ -81,17 +81,26 @@ header nav
 
 .logo
 {
-    font-size: 24px;
+    font-size: 22x;
     font-weight: bold;
     color: #00C3FF;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.logo span
+{
+    font-size: 24px;
 }
 
 .nav-links
 {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a
@@ -99,15 +108,30 @@ header nav
     color: #333;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s;
-    padding: 0;
+    transition: all 0.3s ease;
+    padding: 8px 0;
+    position: relative;
+}
+
+.nav-links a::after
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00C3FF;
+    transition: width 0.3s ease;
 }
 
 .nav-links a:hover
 {
     color: #00C3FF;
-    background: none;
-    transform: none;
+}
+
+.nav-links a:hover::after
+{
+    width: 100%;
 }
 
 .donate-btn-header
@@ -883,7 +907,14 @@ tr:hover
     .btn-primary, .btn-secondary{padding: 10px 24px;font-size: 14px;}
     .stat-item-main h3{font-size: 32px;}
     .campaigns-grid{grid-template-columns: 1fr;}
-    .nav-links{display: none;}
+    .nav-links{display: none;width: 100%;flex-direction: column;gap: 15px;padding: 20px 0 10px;}
+    .nav-links.active{display: flex;}
+    .nav-links li a{display: block;padding: 8px 0;}
+    .user-menu{margin-left: auto;}
+    .user-welcome{display: none;}
+    .btn-user{padding: 6px 14px;font-size: 12px;}
+    .nav-container{padding: 12px 20px;}
+    .mobile-menu-btn{display: block;}
 }
 
 ::-webkit-scrollbar{width: 10px;}
@@ -920,4 +951,80 @@ tr:hover
 {
     color: #00C3FF;
     margin-bottom: 10px;
+}
+
+.user-menu
+{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-welcome
+{
+    color: #666;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.user-welcome span
+{
+    color: #00C3FF;
+    font-weight: 600;
+}
+
+.btn-user
+{
+    background: #00C3FF;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-user:hover
+{
+    background: #0099cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,195,255,0.3);
+}
+
+.btn-logout
+{
+    background: #ff4757;
+}
+
+.btn-logout:hover
+{
+    background: #e03e4c;
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+}
+
+.mobile-menu-btn
+{
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    padding: 5px;
+}
+
+@media(max-width:600px)
+{
+    .nav-container{flex-wrap: wrap;}
+    .user-menu{order: 2;}
+    .mobile-menu-btn{order: 3;}
+    .nav-links{order: 4;}
 }
