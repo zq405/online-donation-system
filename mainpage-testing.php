@@ -27,7 +27,7 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
                 <li><a href="#how=its-works">How It Works</a></li>
                 <li><a href="#how=its-works">How It Works</a></li>
             </ul>
-            <?php if(isset($_SESSION['uder_id'])):?>
+            <?php if(isset($_SESSION['user_id'])):?>
                 <a href="dashboard.php" class="donate-btn-header" style="text-decoration:none">My Dashboard</a>
             <?php else:?>
                 <button class="donate-btn-header" onclick="window.location.href='login.php'">Login/Register</button>
@@ -40,7 +40,7 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
             <h1>Make a Real Difference Today</h1>
             <p>Your donation helps us rescue, rehabilitate and rehomw abandoned and stray animals. Every contribution gives a second chance to an animal in need.</p>
             <div class="cta-buttons">
-                <?php if(isset($_SEESION['user_id'])):?>
+                <?php if(isset($_SESSION['user_id'])):?>
                     <button class="btn-primary" onclick="window.location.href='campaign.php'">Donate Now</button>
                 <?php else:?>
                     <button class="btn-primary" onclick="window.location.href='register.php'">Donate Now</button>
@@ -127,13 +127,13 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
                 <p>Donate security through our payment gateway. Every Ringgit counts</p>
             </div>
             <div class="step">
-                <div class="step=number">3</div>
+                <div class="step-number">3</div>
                 <h3>Track Impact</h3>
                 <p>Receive updates on how your donation helped animals is need</p>
             </div>
             <div class="step">
                 <div class="step-number">4</div>
-                <h3>Esrn ReWards</h3>
+                <h3>Earn Rewards</h3>
                 <p>Earn points and badges for your generosity and support</p>
             </div>
         </div>
