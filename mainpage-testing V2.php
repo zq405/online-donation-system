@@ -124,12 +124,12 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
             <div class="step">
                 <div class="step-number">2</div>
                 <h3>Make a Donation</h3>
-                <p>Donate security through our payment gateway. Every Ringgit counts</p>
+                <p>Donate securely through our payment gateway. Every Ringgit counts</p>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
                 <h3>Track Impact</h3>
-                <p>Receive updates on how your donation helped animals is need</p>
+                <p>Receive updates on how your donation helped animals in need</p>
             </div>
             <div class="step">
                 <div class="step-number">4</div>
