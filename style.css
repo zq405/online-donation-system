@@ -1028,3 +1028,24 @@ tr:hover
     .mobile-menu-btn{order: 3;}
     .nav-links{order: 4;}
 }
+
+.top-nav
+{
+    background: white;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container
+{
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+}

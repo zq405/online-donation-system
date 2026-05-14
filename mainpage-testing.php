@@ -149,5 +149,13 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
     </section>
 
     <?php include 'footer.php';?>
+
+    <script>
+        function toggleMobileMenu()
+        {
+            var navLinks=document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
