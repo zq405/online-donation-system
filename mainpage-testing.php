@@ -37,7 +37,7 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Make a Real Difference Today</h1>
+            <h1>Make a Real Difference Today<span style="display:inline-block;"></span></h1>
             <p>Your donation helps us rescue, rehabilitate and rehomw abandoned and stray animals. Every contribution gives a second chance to an animal in need.</p>
             <div class="cta-buttons">
                 <?php if(isset($_SESSION['user_id'])):?>
