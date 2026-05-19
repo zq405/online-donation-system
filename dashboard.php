@@ -13,7 +13,7 @@ $name=$_SESSION['user_name'];
 switch($role)
 {
     case 'donor':
-        header('Location:donor_dashboard.php');
+        header('Location:mainpage-testing.php');
         break;
     case 'admin':
         header('Location:admin_dashboard.php');
