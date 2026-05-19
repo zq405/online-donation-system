@@ -25,9 +25,6 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
                 <li><a href="#impact">Our Impact</a></li>
                 <li><a href="#featured">Featured Campaign</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
-                <?php if(isset($_SESSION['user_id'])&&($_SESSION['user_role']=='admin')):?>
-                    <li><a href="admin_dashboard.php">Admin Dashboard</a></li>
-                <?php endif;?>
             </ul>
             <div class="user-menu">
                 <?php if(isset($_SESSION['user_id'])):?>
