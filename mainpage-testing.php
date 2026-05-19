@@ -62,7 +62,7 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
     <seciton class="impact-section" id="impact">
         <div class="container" style="max-width:1200px;margin:0 auto;">
             <h2>Our Impact So Far</h2>
-            <p class="subtittle">Thanks to you generous support, we 've achieved these milestones</p>
+            <p class="subtittle">Thanks to you generous support, we've achieved these milestones</p>
             <div class="stat-grid-main">
                 <div class="stat-item-main">
                     <h3><?php echo number_format($total_animals);?>+</h3>
