@@ -74,10 +74,9 @@ $total_donations=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(amount)as tot
         <div class="card">
             <h2>Quick Actions</h2>
             <div class="quick-links">
-                <a href="event.php">Manage Event</a>
+                <a href="campaign.php">Manage Event</a>
                 <a href="user.php">Manage Users</a>
                 <a href="report.php">Export Report</a>
-                <a href="log.php">View Logs</a>
             </div>
         </div>
 
