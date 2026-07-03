@@ -386,7 +386,6 @@ $suspended_donors = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as c
         <a href="campaign.php">Campaigns</a>
         <a href="user.php" style="background: rgba(255,255,255,0.2);">Users</a>
         <a href="report.php">Export Report</a>
-        <a href="log.php">Logs</a>
         <a href="logout.php">Log Out</a>
     </div>
     

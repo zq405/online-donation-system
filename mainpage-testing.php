@@ -90,18 +90,17 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
         <div class="campaigns-grid">
             <?php if($popular_campaigns && mysqli_num_rows($popular_campaigns)>0):?>
                 <?php while($campaign=mysqli_fetch_assoc($popular_campaigns)):
-                    $progress=($campaign['Raised_Amount']/$campaign['Goal_Amount'])*100;
-                    $animal_emoji=$campaign['Animal_Type']=='Dog'?'🐕':($campaign['Animal_Type']=='Cat'?'🐱':'🐰');?>
+                    $progress=($campaign['Raised_Amount']/$campaign['Goal_Amount'])*100;?>
                     <div class="campaign-card-main">
                         <div class="campaign-image">
-                            <?php echo $animal_emoji;?><?php echo htmlspecialchars($campaign['Animal_Type']??'Animal');?>Rescue
+                            <?php echo htmlspecialchars($campaign['Animal_Type']??'Animal');?>Rescue
                         </div>
                         <div class="campaign-info">
-                            <h3><?php echo htmlspecialchars($campaign['Tittle']);?></h3>
+                            <h3><?php echo htmlspecialchars($campaign['Title']);?></h3>
                             <p><?php echo htmlspecialchars(substr($campaign['Description']??'',0,100)).'...';?></p>
                             <div class="campaign-meta">
                                 <span><?php echo htmlspecialchars($campaign['Shelter_Name']??'Animal_Shelter');?></span>
-                                <span><?php echo $campaign['Animal_Count'];?>animals</span>
+                                <span><?php echo $campaign['Animal_Count'];?> animals</span>
                             </div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width:<?php echo min($progress,100);?>%"></div>
