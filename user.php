@@ -404,7 +404,6 @@ $suspended_donors = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as c
             <div class="error" style="margin-bottom: 20px;"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
         <?php endif; ?>
         
-        <!-- 统计卡片 -->
         <div class="user-stats">
             <div class="user-stat-card">
                 <div class="stat-number"><?php echo $total_donors; ?></div>
@@ -420,7 +419,6 @@ $suspended_donors = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as c
             </div>
         </div>
         
-        <!-- 用户列表 -->
         <div class="card" style="padding: 0; overflow: hidden;">
             <div style="padding: 20px 25px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                 <h2 style="margin: 0; border: none; padding: 0;">All Donors</h2>
@@ -509,9 +507,6 @@ $suspended_donors = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as c
         </div>
     </div>
     
-    <!-- ============================================ -->
-    <!-- 确认对话框 -->
-    <!-- ============================================ -->
     <div class="modal" id="confirmModal">
         <div class="modal-content" style="max-width: 420px; text-align: center;">
             <div class="modal-header" style="border: none; padding-bottom: 0;">
@@ -560,9 +555,6 @@ $suspended_donors = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as c
             document.getElementById('visibleCount').textContent = visibleCount;
         }
         
-        // ============================================
-        // 2. 查看用户详情
-        // ============================================
         function viewUser(userId) {
             const modal = document.getElementById('userDetailModal');
             const content = document.getElementById('userDetailContent');
@@ -646,9 +638,6 @@ $suspended_donors = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as c
                 });
         }
         
-        // ============================================
-        // 3. 确认操作
-        // ============================================
         function confirmAction(userId, action) {
             const modal = document.getElementById('confirmModal');
             const title = document.getElementById('confirmTitle');
