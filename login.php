@@ -70,7 +70,7 @@ if(isset($_SESSION['user_id']))
             <div>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" autocomplete="email" placeholder="name@exmaple.com" required oninput="validateEmail()">
-                <span class="input-icon" id="emailIcon">📭</span>
+                <span class="input-icon" id="emailIcon">📧</span>
             </div>
             <div class="validation-message" id="emailMessage"></div>
 

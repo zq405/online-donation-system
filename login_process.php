@@ -1,36 +1,26 @@
 <?php
 session_start();
 include 'connect.php';
+include 'function.php';
 
 if($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: login.php');
     exit();
 }
 
-$email = mysqli_real_escape_string($conn, $_POST['email']);
+$email = $_POST['email'];
 $password = $_POST['password'];
 
-function validateEmailFormat($email)
-{
-    if(!filter_var($email,FILTER_VALIDATE_EMAIL))
-        {
-            return false;
-        }
-    $parts=explode('@',$email);
-    if(count($parts)!=2 || empty($parts[0]) || empty($parts[1]))
-        {
-            return false;
-        }
+$validatedEmail=sanitizeAndValidateEmail($email);
 
-    return true;
-}
-
-if(!validateEmailFormat($email))
+if(empty($validatedEmail))
     {
-        $_SESSION['error']="Invalid email format. Please enter a valid email address.";
+        $_SESSION['error']="Invalid email format. Please enter a valid email address";
         header('Location: login.php');
         exit();
     }
+
+$email=mysqli_real_escape_string($conn,$validatedEmail);
 
 $user = null;
 
