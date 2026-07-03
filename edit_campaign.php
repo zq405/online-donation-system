@@ -278,7 +278,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="error"><?php echo $error; ?></div>
             <?php endif; ?>
             
-            <!-- 状态信息 -->
             <div class="status-info">
                 <span><span class="label">Status:</span> <span class="value"><span class="badge-status <?php echo $campaign['Status']; ?>"><?php echo ucfirst($campaign['Status']); ?></span></span></span>
                 <span><span class="label">Raised:</span> <span class="value">$<?php echo number_format($campaign['Raised_Amount'], 2); ?></span></span>
