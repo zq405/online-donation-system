@@ -10,6 +10,28 @@ if($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $email = mysqli_real_escape_string($conn, $_POST['email']);
 $password = $_POST['password'];
 
+function validateEmailFormat($email)
+{
+    if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+        {
+            return false;
+        }
+    $parts=explode('@',$email);
+    if(count($parts)!=2 || empty($parts[0]) || empty($parts[1]))
+        {
+            return false;
+        }
+
+    return true;
+}
+
+if(!validateEmailFormat($email))
+    {
+        $_SESSION['error']="Invalid email format. Please enter a valid email address.";
+        header('Location: login.php');
+        exit();
+    }
+
 $user = null;
 
 $result = mysqli_query($conn, "SELECT Donors_ID AS user_id, Name, Email, 'donor' AS role, Password FROM donors WHERE Email='$email'");

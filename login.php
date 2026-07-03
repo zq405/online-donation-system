@@ -87,6 +87,49 @@ if(isset($_SESSION['user_id']))
     </div>
 
     <script>
+        function validateEmail()
+        {
+            const emailInput=document.getElementById('email');
+            const emailMessage=document.getElementById('emailMessage');
+            const emailIcon=document.getElementById('emailIcon');
+            const email=emailInput.value.trim();
+            const emailPattern=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if(email==='')
+            {
+                emailInput.className='';
+                emailMessage.className='validation-message';
+                emailMessage.textContent='';
+                emailIcon.textContent='📭';
+                return false;
+            }
+
+            if(emailPattern.test(email))
+            {
+                emailInput.className='input-success';
+                emailMessage.className='validation-message success';
+                emailMessage.textContent='Valid email format';
+                emailIcon.textContent='✓';
+                return true;
+            }
+            else
+            {
+                emailInput.className='input-error';
+                emailMessage.className='validation-message error';
+                emailMessage.textContent='Please enter a valid email address';
+                emailIcon.textContent='❌';
+                return false;
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit',function(e){
+            const isValid=validateEmail();
+            if(!isValid)
+            {
+                e.preventDefault();
+                document.getElementById('email').focus();
+            }
+        });
         
     </script>
 </body>
