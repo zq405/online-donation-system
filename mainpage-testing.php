@@ -34,7 +34,7 @@ $total_animals=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(Animal_Count)as
                     <div class="user-welcome">
                         <span><?php echo htmlspecialchars($_SESSION['user_name']??'User');?></span>
                     </div>
-                    <a href="dashboard.php" class="btn-user">Dashboard</a>
+                    <a href="donor_dashboard.php" class="btn-user">Dashboard</a>
                     <a href="logout.php" class="btn-user btn-logout">Logout</a>
                 <?php else:?>
                     <button class="btn-user" onclick="window.location.href='login.php'">Login</button>
