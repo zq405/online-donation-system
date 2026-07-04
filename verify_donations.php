@@ -427,7 +427,7 @@ $rejected_count = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as cou
         <a href="user.php">Users</a>
         <a href="report.php">Export Report</a>
         <a href="verify_donations.php" style="background: rgba(255,255,255,0.2);">Verify Donations</a>
-        <a href="log.php">Logs</a>
+        <a href="mainpage-testing.php">Main Page</a>
         <a href="logout.php">Log Out</a>
     </div>
     
