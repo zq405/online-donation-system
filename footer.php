@@ -9,16 +9,13 @@
                 <h3 style="color:#00C3FF;margin-bottom:15px;">Quick Links</h3>
                 <ul style="list-style:none;padding:0;">
                     <li style="margin-bottom:8px;">
-                        <a href="index.php" style="color:#ccc;text-decoration:none;transition:color 0.3s;">Home</a>
+                        <a href="mainpage-testing.php" style="color:#ccc;text-decoration:none;transition:color 0.3s;">Home</a>
                     </li>
                     <li style="margin-bottom:8px;">
-                        <a href="campaign.php" style="color:#ccc;text-decoration:none;transition:color 0.3s;">Browse Event</a>
+                        <a href="campaign.php" style="color:#ccc;text-decoration:none;transition:color 0.3s;">Browse Campaigns</a>
                     </li>
                     <li style="margin-bottom:8px;">
-                        <a href="how_it_work.php" style="color:#ccc;text-decoration:none;transition:color 0.3s;">How_its_work</a>
-                    </li>
-                    <li style="margin-bottom:8px;">
-                        <a href="contact.php" style="color:#ccc;text-decoration:none;transition:color 0.3s;">Contact Us</a>
+                        <a href="how_it_works.php" style="color:#ccc;text-decoration:none;transition:color 0.3s;">How_its_work</a>
                     </li>
                 </ul>
             </div>
