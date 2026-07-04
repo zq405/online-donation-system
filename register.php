@@ -263,7 +263,7 @@ include 'connect.php';
         function validateConfirmPassword()
         {
             const password=document.getElementById('password').value;
-            const confirm=document.getElementById('confirm_password');
+            const confirm=document.getElementById('confirm_password').value;
             const confirmMessage=document.getElementById('confirmMessage');
             const confirmIcon=document.getElementById('confirmIcon');
 
