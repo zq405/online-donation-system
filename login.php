@@ -16,6 +16,26 @@ if(isset($_SESSION['user_id']))
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .error
+        {
+            color: #dc2626;
+            background-color: #fef2f2;
+            border: 1px solid #dc2626;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .success
+        {
+            color: #16a34a;
+            background-color: #f0fdf4;
+            border: 1px solid #16a34a;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
         .input-error
         {
             border-color: #dc2626 !important;
@@ -60,14 +80,14 @@ if(isset($_SESSION['user_id']))
     <div class="login-container">
         <h2>Online Donation</h2>
         <?php if(isset($_SESSION['error'])):?>
-            <div class="error"><?php echo $_SESSION['error'];unset($_SESSION['error']); ?></div>    
+            <div class="error"><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></div>    
         <?php endif; ?>
 
         <?php if(isset($_SESSION['success'])): ?>
-            <div class="sucsess"><?php echo $_SESSION['success'];unset($_SESSION['error']); ?></div>
+            <div class="success"><?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?></div>
         <?php endif; ?>
         <h3>Login</h3>
-        <form method="POST" action="login_process.php">
+        <form id="loginForm" method="POST" action="login_process.php">
             <div>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" autocomplete="email" placeholder="name@exmaple.com" required oninput="validateEmail()">
