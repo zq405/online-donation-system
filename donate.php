@@ -40,11 +40,24 @@ if (!$can_donate) {
     exit();
 }
 
+// 获取 e-wallet 账户信息（仅 1 个）
+$ewallet_sql = "SELECT * FROM ewallet_accounts WHERE Status = 'active' LIMIT 1";
+$ewallet_result = mysqli_query($conn, $ewallet_sql);
+$ewallet = mysqli_fetch_assoc($ewallet_result);
+
+// 如果没有 e-wallet 账户信息，显示默认
+if (!$ewallet) {
+    $ewallet = [
+        'Name' => 'Touch n Go',
+        'Account_No' => '012-345-6789',
+        'Account_Holder' => 'Animal Shelters House'
+    ];
+}
+
 // 处理捐赠提交
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $amount = floatval($_POST['amount']);
-    $bank_name = mysqli_real_escape_string($conn, $_POST['bank_name'] ?? '');
-    $account_holder = mysqli_real_escape_string($conn, $_POST['account_holder'] ?? '');
+    $ewallet_account = mysqli_real_escape_string($conn, $_POST['ewallet_account'] ?? '');
     $transfer_reference = mysqli_real_escape_string($conn, $_POST['transfer_reference'] ?? '');
     $transfer_date = mysqli_real_escape_string($conn, $_POST['transfer_date'] ?? '');
     $is_anonymous = isset($_POST['is_anonymous']) ? 1 : 0;
@@ -53,16 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 验证
     if ($amount <= 0) {
         $error = "Please enter a valid donation amount.";
-    } elseif (empty($bank_name)) {
-        $error = "Please enter the bank name.";
-    } elseif (empty($account_holder)) {
-        $error = "Please enter the account holder name.";
+    } elseif (empty($ewallet_account)) {
+        $error = "Please enter your e-wallet account name.";
     } elseif (empty($transfer_reference)) {
         $error = "Please enter the transfer reference number.";
     } elseif (empty($transfer_date)) {
         $error = "Please select the transfer date.";
     } elseif (!isset($_FILES['receipt_image']) || $_FILES['receipt_image']['error'] != 0) {
-        $error = "Please upload a receipt image.";
+        $error = "Please upload a receipt/screenshot image.";
     } else {
         // 处理收据上传
         $target_dir = "uploads/receipts/";
@@ -86,8 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             Bank_Name, Account_Holder, Transfer_Reference, Transfer_Date,
                             Receipt_Image, Is_Anonymous, Donor_Message, Status, Created_At
                         ) VALUES (
-                            $donor_id, $campaign_id, $amount, 'Manual Transfer',
-                            '$bank_name', '$account_holder', '$transfer_reference', '$transfer_date',
+                            $donor_id, $campaign_id, $amount, 'E-Wallet',
+                            '" . mysqli_real_escape_string($conn, $ewallet['Name']) . "', 
+                            '$ewallet_account', '$transfer_reference', '$transfer_date',
                             '$target_file', $is_anonymous, '$donor_message', 'pending', NOW()
                         )";
                 
@@ -95,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $success = "Your donation has been submitted for verification. Our team will review your receipt and approve it within 1-2 business days.";
                 } else {
                     $error = "Donation submission failed. Please try again. Error: " . mysqli_error($conn);
-                    // 删除已上传的文件
                     if (file_exists($target_file)) {
                         unlink($target_file);
                     }
@@ -106,21 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
-// 获取银行账户信息
-$bank_sql = "SELECT * FROM bank_accounts WHERE Status = 'active' LIMIT 1";
-$bank_result = mysqli_query($conn, $bank_sql);
-$bank_info = mysqli_fetch_assoc($bank_result);
-
-// 如果没有银行账户信息，显示默认
-if (!$bank_info) {
-    $bank_info = [
-        'Bank_Name' => 'Maybank',
-        'Account_Number' => '1234 5678 9012 3456',
-        'Account_Holder' => 'Animal Shelters House',
-        'Branch' => 'Kuala Lumpur'
-    ];
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,7 +124,7 @@ if (!$bank_info) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate - Animal Shelters House</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         .donate-container {
             max-width: 700px;
@@ -142,33 +138,35 @@ if (!$bank_info) {
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
         }
         
-        .bank-info-box {
+        .ewallet-info-box {
             background: #f0f7ff;
-            border: 2px dashed #00C3FF;
+            border: 2px solid #00C3FF;
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
+            text-align: center;
         }
         
-        .bank-info-box h4 {
-            color: #00C3FF;
+        .ewallet-info-box .ewallet-icon {
+            font-size: 48px;
             margin-bottom: 10px;
         }
         
-        .bank-info-box .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-            font-size: 14px;
+        .ewallet-info-box h4 {
+            color: #00C3FF;
+            margin-bottom: 5px;
         }
         
-        .bank-info-box .row .label {
-            color: #666;
-        }
-        
-        .bank-info-box .row .value {
-            color: #333;
+        .ewallet-info-box .account-detail {
+            font-size: 16px;
             font-weight: 600;
+            color: #333;
+            margin: 5px 0;
+        }
+        
+        .ewallet-info-box .account-label {
+            font-size: 13px;
+            color: #666;
         }
         
         .donate-box .campaign-info {
@@ -369,6 +367,30 @@ if (!$bank_info) {
             transform: translateY(-2px);
         }
         
+        .instruction-box {
+            background: #fef3c7;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .instruction-box p {
+            font-size: 14px;
+            color: #78350f;
+            margin: 0;
+        }
+        
+        .instruction-box ol {
+            margin: 10px 0 0 20px;
+            color: #78350f;
+            font-size: 14px;
+        }
+        
+        .instruction-box ol li {
+            margin-bottom: 3px;
+        }
+        
         @media (max-width: 768px) {
             .donate-box .form-group .amount-presets {
                 gap: 8px;
@@ -377,10 +399,6 @@ if (!$bank_info) {
                 padding: 6px 14px;
                 font-size: 13px;
             }
-            .bank-info-box .row {
-                flex-direction: column;
-                gap: 3px;
-            }
         }
     </style>
 </head>
@@ -388,10 +406,11 @@ if (!$bank_info) {
     <!-- 导航栏 -->
     <div class="nav">
         <a href="donor_dashboard.php">My Dashboard</a>
-        <a href="browse_campaigns.php">Browse Campaigns</a>
+        <a href="browse_campaign.php">Browse Campaigns</a>
         <a href="my_donations.php">My Donations</a>
         <a href="profile.php">Profile</a>
         <a href="how_it_works.php">How It Works</a>
+        <a href="mainpage-testing.php">Main Page</a>
         <a href="logout.php">Log Out</a>
     </div>
     
@@ -402,13 +421,13 @@ if (!$bank_info) {
                     <div class="icon">Thank you</div>
                     <h2>Donation Submitted!</h2>
                     <p><?php echo $success; ?></p>
-                    <p style="font-size: 14px; margin-top: 10px;">You will receive a confirmation email once your donation is verified.</p>
+                    <p style="font-size: 14px; margin-top: 10px;">You will receive a confirmation once your donation is verified.</p>
                     <a href="campaign_detail.php?id=<?php echo $campaign['Campaign_ID']; ?>" class="btn-continue">Back to Campaign</a>
                 </div>
             <?php else: ?>
                 <div class="donate-box">
                     <h2>Make a Donation</h2>
-                    <p style="color: #666; margin-bottom: 20px;">Transfer your donation to our bank account and upload the receipt for verification.</p>
+                    <p style="color: #666; margin-bottom: 20px;">Transfer your donation via e-wallet and upload the screenshot/receipt for verification.</p>
                     
                     <?php if ($error): ?>
                         <div class="error"><?php echo $error; ?></div>
@@ -419,26 +438,12 @@ if (!$bank_info) {
                         <p>Goal: RM <?php echo number_format($campaign['Goal_Amount'], 0); ?> | Raised: RM <?php echo number_format($campaign['Raised_Amount'], 0); ?></p>
                     </div>
                     
-                    <!-- 银行账户信息 -->
-                    <div class="bank-info-box">
-                        <h4>Bank Account Details</h4>
-                        <p style="font-size: 13px; color: #666; margin-bottom: 10px;">Please transfer your donation to the following bank account:</p>
-                        <div class="row">
-                            <span class="label">Bank</span>
-                            <span class="value"><?php echo htmlspecialchars($bank_info['Bank_Name']); ?></span>
-                        </div>
-                        <div class="row">
-                            <span class="label">Account Number</span>
-                            <span class="value"><?php echo htmlspecialchars($bank_info['Account_Number']); ?></span>
-                        </div>
-                        <div class="row">
-                            <span class="label">Account Holder</span>
-                            <span class="value"><?php echo htmlspecialchars($bank_info['Account_Holder']); ?></span>
-                        </div>
-                        <div class="row">
-                            <span class="label">Branch</span>
-                            <span class="value"><?php echo htmlspecialchars($bank_info['Branch']); ?></span>
-                        </div>
+                    <!-- E-Wallet 账户信息（仅1个） -->
+                    <div class="ewallet-info-box">
+                        <div class="ewallet-icon">E-Wallet</div>
+                        <h4><?php echo htmlspecialchars($ewallet['Name']); ?></h4>
+                        <div class="account-detail"><?php echo htmlspecialchars($ewallet['Account_No']); ?></div>
+                        <div class="account-label">Account Holder: <?php echo htmlspecialchars($ewallet['Account_Holder']); ?></div>
                         <p style="font-size: 12px; color: #888; margin-top: 10px;">Please use your full name as the reference when transferring.</p>
                     </div>
                     
@@ -456,20 +461,14 @@ if (!$bank_info) {
                             </div>
                         </div>
                         
-                        <!-- 银行信息 -->
                         <div class="form-group">
-                            <label>Bank Name <span class="required">*</span></label>
-                            <input type="text" name="bank_name" placeholder="e.g., Maybank" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Account Holder Name <span class="required">*</span></label>
-                            <input type="text" name="account_holder" placeholder="Your full name as per bank account" required>
+                            <label>E-Wallet Account Name <span class="required">*</span></label>
+                            <input type="text" name="ewallet_account" placeholder="Your full name as per e-wallet account" required>
                         </div>
                         
                         <div class="form-group">
                             <label>Transfer Reference Number <span class="required">*</span></label>
-                            <input type="text" name="transfer_reference" placeholder="e.g., 1234567890" required>
+                            <input type="text" name="transfer_reference" placeholder="e.g., TXN1234567890" required>
                         </div>
                         
                         <div class="form-group">
@@ -479,10 +478,10 @@ if (!$bank_info) {
                         
                         <!-- 收据上传 -->
                         <div class="form-group">
-                            <label>Upload Receipt <span class="required">*</span></label>
+                            <label>Upload Receipt / Screenshot <span class="required">*</span></label>
                             <div class="file-input-wrapper" onclick="document.getElementById('receipt_file').click()">
                                 <div style="font-size: 40px;">Upload</div>
-                                <p>Click to upload receipt image</p>
+                                <p>Click to upload receipt screenshot</p>
                                 <div class="file-name" id="fileName">No file selected</div>
                                 <div class="hint">Supported formats: JPG, PNG, PDF (Max 5MB)</div>
                                 <input type="file" id="receipt_file" name="receipt_image" accept=".jpg,.jpeg,.png,.pdf" required onchange="updateFileName()">
@@ -503,11 +502,14 @@ if (!$bank_info) {
                             <textarea name="donor_message" placeholder="Leave a message of encouragement..."></textarea>
                         </div>
                         
-                        <div style="background: #fef3c7; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #f59e0b;">
-                            <p style="font-size: 14px; color: #78350f; margin: 0;">
-                                Please transfer the donation amount to our bank account first, then upload the receipt.
-                                Your donation will be verified by our team within 1-2 business days.
-                            </p>
+                        <div class="instruction-box">
+                            <p><strong>How to donate:</strong></p>
+                            <ol>
+                                <li>Transfer your donation amount to the e-wallet account above.</li>
+                                <li>Take a screenshot of the transaction receipt.</li>
+                                <li>Fill in the form below and upload the screenshot.</li>
+                                <li>Our team will verify your donation within 1-2 business days.</li>
+                            </ol>
                         </div>
                         
                         <button type="submit" class="btn-submit">Submit for Verification</button>

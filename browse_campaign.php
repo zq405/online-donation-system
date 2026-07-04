@@ -268,7 +268,7 @@ $total_campaigns = mysqli_num_rows($campaigns);
 <body>
     <div class="nav">
         <a href="donor_dashboard.php">My Dashboard</a>
-        <a href="browse_campaigns.php" style="background: rgba(255,255,255,0.2);">Browse Campaigns</a>
+        <a href="browse_campaign.php" style="background: rgba(255,255,255,0.2);">Browse Campaigns</a>
         <a href="my_donations.php">My Donations</a>
         <a href="profile.php">Profile</a>
         <a href="how_it_works.php">How It Works</a>

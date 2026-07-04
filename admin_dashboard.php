@@ -43,6 +43,7 @@ $total_donations=mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(amount)as tot
         <a href="campaign.php">Event</a>
         <a href="user.php">User</a>
         <a href="report.php">Export Report</a>
+        <a href="verify_donations.php">Verify Donations</a>
         <a href="mainpage-testing.php">Main Page</a>
         <a href="logout.php">Log Out</a>
     </div>
