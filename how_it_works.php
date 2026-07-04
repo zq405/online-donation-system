@@ -132,7 +132,7 @@ if (!isset($_SESSION['user_id'])) {
     <!-- 导航栏 -->
     <div class="nav">
         <a href="donor_dashboard.php">My Dashboard</a>
-        <a href="browse_campaigns.php">Browse Campaigns</a>
+        <a href="browse_campaign.php">Browse Campaigns</a>
         <a href="my_donations.php">My Donations</a>
         <a href="profile.php">Profile</a>
         <a href="how_it_works.php" style="background: rgba(255,255,255,0.2);">How It Works</a>
