@@ -24,7 +24,7 @@ $email=mysqli_real_escape_string($conn,$validatedEmail);
 
 $user = null;
 
-$result = mysqli_query($conn, "SELECT Donors_ID AS user_id, Name, Email, 'donor' AS role, Password FROM donors WHERE Email='$email'");
+$result = mysqli_query($conn, "SELECT Donors_ID AS user_id, Name, Email, 'donor' AS role, Password, Status FROM donors WHERE Email='$email'");
 if($result && mysqli_num_rows($result) == 1) {
     $user = mysqli_fetch_assoc($result);
 }
@@ -37,6 +37,15 @@ if(!$user) {
 }
 
 if($user && password_verify($password, $user['Password'])) {
+
+    // Block suspended donors before starting their session
+    if($user['role'] === 'donor' && isset($user['Status']) && $user['Status'] === 'suspended') {
+        $_SESSION['blocked'] = true;
+        $_SESSION['error'] = "Your account has been suspended. Please contact admin@yourdomain.com for assistance.";
+        header('Location: login.php');
+        exit();
+    }
+
     $_SESSION['user_id'] = $user['user_id'];
     $_SESSION['user_name'] = $user['Name'];
     $_SESSION['user_email'] = $email;
