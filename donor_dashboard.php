@@ -275,7 +275,7 @@ $recent_donations = mysqli_query($conn, $recent_donations_sql);
     </style>
 </head>
 <body>
-    <div class="nav">
+    <div class="nav" style="position:center;">
         <a href="donor_dashboard.php" style="background: rgba(255,255,255,0.2);">My Dashboard</a>
         <a href="browse_campaign.php">Browse Campaigns</a>
         <a href="my_donations.php">My Donations</a>
