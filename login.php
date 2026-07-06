@@ -6,6 +6,13 @@ if(isset($_SESSION['user_id']))
         header("Location:dashboard.php");
         exit();
     }
+
+$showBlockedModal = isset($_SESSION['blocked']) && $_SESSION['blocked'] === true;
+$blockedMessage = $_SESSION['error'] ?? 'Your account has been suspended. All transactions and activity are currently blocked.';
+if ($showBlockedModal) {
+    unset($_SESSION['blocked']);
+    unset($_SESSION['error']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -74,9 +81,65 @@ if(isset($_SESSION['user_id']))
             transform: translateY(-50%);
             font-size: 18px;
         }
+
+        .modal
+        {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal.active
+        {
+            display: flex;
+        }
+        @keyframes fadeIn
+        {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content
+        {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp
+        {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
+
+    <?php if ($showBlockedModal): ?>
+    <div class="modal active" id="blockedModal">
+        <div class="modal-content">
+            <div style="font-size:60px; margin-bottom:10px;">🚫</div>
+            <h2 style="color:#dc2626; margin-bottom:10px;">Account Suspended</h2>
+            <p style="color:#555; line-height:1.6; margin:0 0 20px;">
+                <?php echo htmlspecialchars($blockedMessage); ?>
+            </p>
+            <button type="button" style="background:#00C3FF; color:white; padding:10px 24px; border:none; border-radius:30px; cursor:pointer; font-weight:600;"
+                    onclick="document.getElementById('blockedModal').classList.remove('active')">
+                OK
+            </button>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <div class="login-container">
         <h2>Online Donation</h2>
         <?php if(isset($_SESSION['error'])):?>
