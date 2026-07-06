@@ -124,8 +124,12 @@ include 'connect.php';
                 <div class="validation-message" id="emailMessage"></div>
             </div>
             <div>
-                <label>Phone</label>
-                <input type="tel" name="phone" id="phone" autocomplete="tel" placeholder="Enter phone number">
+                <label for="phone">Phone</label>
+                <div class="input-group">
+                    <input type="tel" name="phone" id="phone" autocomplete="tel" placeholder="Enter phone number" required oninput="validatePhone()" onblur="validatePhone()">
+                    <span class="input-icon" id="phoneIcon">📱</span>
+                </div>
+                <div class="validation-message" id="phoneMessage"></div>
             </div>
             <div>
                 <label for="password">Password</label>
@@ -201,6 +205,48 @@ include 'connect.php';
             emailMessage.className='validation-message success';
             emailMessage.textContent='Valid email address';
             emailIcon.textContent='✓';
+            return true;
+        }
+
+        function validatePhone()
+        {
+            const phoneInput=document.getElementById('phone');
+            const phoneMessage=document.getElementById('phoneMessage');
+            const phoneIcon=document.getElementById('phoneIcon');
+            const phone=phoneInput.value.trim();
+            const numbersOnlyPattern=/^[0-9]+$/;
+
+            if(phone==='')
+            {
+                phoneInput.className='';
+                phoneMessage.className='validation-message';
+                phoneMessage.textContent='';
+                phoneIcon.textContent='📱';
+                return false;
+            }
+
+            if(!numbersOnlyPattern.test(phone))
+            {
+                phoneInput.className='input-error';
+                phoneMessage.className='validation-message error';
+                phoneMessage.textContent='Phone number must contain numbers only';
+                phoneIcon.textContent='❌';
+                return false;
+            }
+
+            if(phone.length<7)
+            {
+                phoneInput.className='input-warning';
+                phoneMessage.className='validation-message warning';
+                phoneMessage.textContent='Please enter a valid phone number';
+                phoneIcon.textContent='⚠️';
+                return false;
+            }
+
+            phoneInput.className='input-success';
+            phoneMessage.className='validation-message success';
+            phoneMessage.textContent='Valid phone number';
+            phoneIcon.textContent='✓';
             return true;
         }
 
@@ -301,6 +347,16 @@ include 'connect.php';
                 errorMsg.style.display = 'block';
                 errorMsg.innerHTML = 'Please enter a valid email address.';
                 document.getElementById('email').focus();
+                return;
+            }
+
+            const isPhoneValid=validatePhone();
+            if (!isPhoneValid)
+            {
+                e.preventDefault();
+                errorMsg.style.display = 'block';
+                errorMsg.innerHTML = 'Please enter a valid phone number (numbers only).';
+                document.getElementById('phone').focus();
                 return;
             }
             
