@@ -263,8 +263,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="nav">
         <a href="admin_dashboard.php">Dashboard</a>
-        <a href="campaign.php" style="background: rgba(255,255,255,0.2);">Campaigns</a>
-        <a href="user.php">Users</a>
+        <a href="campaign.php">Campaign</a>
+        <a href="user.php">User</a>
         <a href="report.php">Export Report</a>
         <a href="verify_donations.php">Verify Donations</a>
         <a href="mainpage-testing.php">Main Page</a>

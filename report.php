@@ -347,9 +347,9 @@ $total_amount = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(amount) as to
 <body>
     <div class="nav">
         <a href="admin_dashboard.php">Dashboard</a>
-        <a href="campaign.php">Campaigns</a>
-        <a href="user.php">Users</a>
-        <a href="report.php" style="background: rgba(255,255,255,0.2);">Export Report</a>
+        <a href="campaign.php">Campaign</a>
+        <a href="user.php">User</a>
+        <a href="report.php">Export Report</a>
         <a href="verify_donations.php">Verify Donations</a>
         <a href="mainpage-testing.php">Main Page</a>
         <a href="logout.php">Log Out</a>
